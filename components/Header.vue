@@ -27,7 +27,7 @@
             <NuxtLink class="nav-link" activeClass="active" to="/auth/register">Register</NuxtLink>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <NuxtLink class="nav-link" activeClass="active" to="/auth/login">Login</NuxtLink>
           </li>
         </ul>
       </div>

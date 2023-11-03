@@ -24,8 +24,9 @@
             <label htmlFor="c_password" class="form-label">Confirm Password</label>
             <input type="password" v-model="formData.c_password" class="form-control" id="c_password"/>
           </div>
-          <button class="btn btn-primary">
+          <button :disabled="loading" class="btn btn-primary">
             Register
+            <div v-if="loading" class="spinner-border spinner-border-sm ms-2"></div>
           </button>
         </form>
       </div>
@@ -34,6 +35,8 @@
 </template>
 
 <script setup>
+import { useToast } from "vue-toastification";
+const loading = ref(false);
 const errors = ref([]);
 const formData = reactive({
   name: "",
@@ -41,16 +44,20 @@ const formData = reactive({
   password: "",
   c_password: "",
 });
-
+const toast = useToast();
 async function register() {
   try {
+    loading.value = true;
     const user = await $fetch('/api/auth/register', {
       method: 'POST',
       body: formData
     })
+    toast.success("You are registered!");
     return navigateTo('/')
   } catch (error) {
     errors.value = Object.values(error.data.data).flat()
+  } finally {
+    loading.value = false;
   }
 }
 </script>
