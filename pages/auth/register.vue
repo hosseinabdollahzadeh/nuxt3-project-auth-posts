@@ -45,6 +45,7 @@ const formData = reactive({
   c_password: "",
 });
 const toast = useToast();
+const { authUser } = useAuth();
 async function register() {
   try {
     loading.value = true;
@@ -52,6 +53,7 @@ async function register() {
       method: 'POST',
       body: formData
     })
+    authUser.value = user;
     toast.success("You are registered!");
     return navigateTo('/')
   } catch (error) {
