@@ -29,6 +29,10 @@
 <script setup>
 import {useToast} from "vue-toastification";
 
+definePageMeta({
+  middleware: 'guest'
+})
+
 const loading = ref(false);
 const errors = ref([]);
 const formData = reactive({
