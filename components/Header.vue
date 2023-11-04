@@ -44,10 +44,12 @@ import {useToast} from "vue-toastification";
 
 const toast = useToast()
 const {authUser} = useAuth();
-
 async function logout() {
+const headers = useRequestHeaders(['cookie']);
+
   await useFetch('/api/auth/logout', {
-    method: 'POST'
+    method: 'POST',
+    headers
   })
 
   authUser.value = null;
